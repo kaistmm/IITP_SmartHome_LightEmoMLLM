@@ -1,0 +1,49 @@
+model:
+  arch: minigpt_v2
+  model_type: pretrain
+  max_txt_len: 500
+  end_sym: "</s>"
+  low_resource: False
+  prompt_template: '[INST] {} [/INST]'
+  llama_model: "/mnt/bear3/users/jungji/ckpt/Llama-2-7b-chat-hf"
+  #llama_model: "/mnt/sting/dongmin/IITP-Smarthome/eval/checkpoint/Llama-2-7b-chat-hf"
+  ckpt: "/mnt/bear3/users/jungji/ckpt/emotion_llama/checkpoint_best.pth"
+  #ckpt: "/mnt/sting/dongmin/IITP-Smarthome/eval/checkpoint/emotion_llama/checkpoint_best.pth"
+  lora_r: 64
+  lora_alpha: 16
+  prune:
+    enabled: true
+    method: wanda # just set as wanda
+    sparsity_ratio: 0.1
+    nsamples: 8 # number of calibration sequences to collect stats from
+    seed: 0 # seed for calibration sampling 
+    seqlen: 512 # sequence length for calibration
+
+datasets:    
+  feature_face_caption:  #
+    batch_size: 1
+    vis_processor:
+      train:
+        name: "blip2_image_train"
+        image_size: 448
+    text_processor:
+      train:
+        name: "blip_caption"
+    sample_ratio: 30
+
+evaluation_datasets:
+  feature_face_caption:
+    eval_file_path: /mnt/lynx2/datasets/mer2023/features_of_MER2023-SEMI/relative_test3_NCEV.txt # MER2023
+    img_path: /mnt/lynx2/datasets/mer2023/features_of_MER2023-SEMI/first_frames_MER2023-SEMI
+    max_new_tokens: 500
+    batch_size: 1
+  # mer2024_caption:
+  #   eval_file_path: eval_configs/relative_train_NCEV.txt # MER2024
+  #   img_path: mer2023/mer2023test_unzip/test1
+  #   max_new_tokens: 500
+  #   batch_size: 1
+
+run:
+  task: image_text_pretrain
+  name: minigptv2_evaluation
+  save_path: emotion_llm_result
