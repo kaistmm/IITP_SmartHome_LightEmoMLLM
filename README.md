@@ -74,7 +74,35 @@ torchrun --nproc_per_node 1 eval_emotion.py --cfg-path eval_configs/eval_emotion
 ```
 
 ---
+## 🎯 Simple Inference without Pruning
 
+### 1. Download Model Weights
+
+####  Hubert Checkpoint(Audio Encoder)
+Download `chinese-hubert-large` https://huggingface.co/TencentGameMate/chinese-hubert-large
+
+
+####  Base Model
+Download `LLaMA-2 7B Chat` https://huggingface.co/meta-llama/Llama-2-7b-chat-hf
+
+Set model path inside `eval_emotion.yaml`:
+```yaml
+llama_model: "/mnt/bear3/users/jungji/ckpt/Llama-2-7b-chat-hf"
+```
+
+####  Finetuned Checkpoint
+Download `checkpoint_best.pth`  https://drive.google.com/file/d/1NoPZDj5_392zBtVK1IHO8bepA4910iI_/view
+
+Set model path inside `eval_emotion.yaml`:
+```yaml
+ckpt: "/path/to/checkpoint_best.pth"
+```
+
+### 2. Run Inference
+
+--video-path "video_path" --hubert-model-path "/mnt/bear3/users/jungji/ckpt/chinese-hubert-large"
+
+---
 ### 📚 Reference
 
 Original Emotion-LLaMA Repository:  
