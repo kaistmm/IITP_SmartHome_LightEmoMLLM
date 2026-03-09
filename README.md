@@ -74,7 +74,7 @@ torchrun --nproc_per_node 1 eval_emotion.py --cfg-path eval_configs/eval_emotion
 ```
 
 ---
-## 🎯 Simple Inference without Pruning
+## 🎯 Simple Inference without Pruning with Video
 
 ### 1. Download Model Weights
 
@@ -100,7 +100,11 @@ ckpt: "/path/to/checkpoint_best.pth"
 
 ### 2. Run Inference
 
---video-path "video_path" --hubert-model-path "/mnt/bear3/users/jungji/ckpt/chinese-hubert-large"
+Run inference via:
+```
+python infer_video.py --video-path example/sample_00000167.mp4 --hubert-model-path /mnt/bear3/users/jungji/ckpt/chinese-hubert-large
+
+```
 
 ---
 ### 📚 Reference
