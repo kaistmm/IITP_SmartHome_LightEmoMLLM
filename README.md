@@ -102,8 +102,7 @@ ckpt: "/path/to/checkpoint_best.pth"
 
 Run inference via:
 ```
-python infer_video.py --video-path example/sample_00000167.mp4 --hubert-model-path /mnt/bear3/users/jungji/ckpt/chinese-hubert-large
-
+python infer_video.py --video-path example/sample_00000167.mp4 --hubert-model-path /mnt/bear3/users/jungji/ckpt/chinese-hubert-large --cfg-path eval_configs/eval_emotion.yaml
 ```
 
 ---
